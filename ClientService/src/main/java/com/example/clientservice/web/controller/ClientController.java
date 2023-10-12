@@ -27,11 +27,16 @@ public class ClientController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerClient(@RequestBody Client client) {
+    public ResponseEntity<String> registerClient(@RequestBody ClientRegistrationRequest registrationRequest) {
         try {
-            String username = client.getUsername();
-            String password = client.getPassword();
-            String email = client.getEmail();
+            String username = registrationRequest.getUsername();
+            String password = registrationRequest.getPassword();
+            String email = registrationRequest.getEmail();
+
+            // Check if the username is already taken
+            if (clientService.findByUsername(username) != null) {
+                return ResponseEntity.badRequest().body("Username is already taken");
+            }
 
             clientService.registerClient(username, password, email);
 
@@ -50,10 +55,6 @@ public class ClientController {
             }
 
             String hashedPasswordFromDatabase = client.getPassword();
-            String hashedPasswordAttempt = passwordEncoder.encode(password);
-
-            /* System.out.println("Hashed Password from Database: " + hashedPasswordFromDatabase);
-             System.out.println("Hashed Password from Login Attempt: " + hashedPasswordAttempt);*/
 
             if (passwordEncoder.matches(password, hashedPasswordFromDatabase)) {
                 return ResponseEntity.ok("Login successful");
@@ -62,6 +63,21 @@ public class ClientController {
             }
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Login failed");
+        }
+    }
+
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Client> getClientById(@PathVariable Long id) {
+        try {
+            Client client = clientService.findById(id);
+
+            if (client == null) {
+                return ResponseEntity.badRequest().body(null);
+            }
+
+            return ResponseEntity.ok(client);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
         }
     }
 }

@@ -34,4 +34,7 @@ public class ClientService {
         return clientRepository.findByUsername(username);
     }
 
+    public Client findById(Long clientId) {
+        return clientRepository.findById(clientId).orElse(null);
+    }
 }

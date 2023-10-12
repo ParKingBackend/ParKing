@@ -18,4 +18,8 @@ public class PremiumSubscriptionService {
         this.premiumSubscriptionRepository = premiumSubscriptionRepository;
     }
 
+
+    public void saveSubscription(PremiumSubscription subscription) {
+        premiumSubscriptionRepository.save(subscription);
+    }
 }

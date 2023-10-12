@@ -1,22 +1,27 @@
 package com.example.clientservice.model;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import jakarta.persistence.*;
 import lombok.Getter;
-
+import lombok.Setter;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "clients")
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long clientId; // Primary key generated automatically
+    private Long id; // Primary key generated automatically
     private String username;
     private String password;
     private String email;
-    @Column(nullable = true) // Make premiumId nullable
-    private Long premiumId;
+    @Column(name = "bank_account")
+    private String bankAccount; // Nullable attribute
+    @Getter
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
+    private PremiumSubscription premiumSubscription;
 
     // Constructors, getters, and setters
 
@@ -26,7 +31,7 @@ public class Client {
 
     public Client(String username, String password, String email) {
         this.username = username;
-        this.password = password;
+        setPassword(password);
         this.email = email;
     }
 
@@ -37,26 +42,29 @@ public class Client {
     }
 
     public void setPassword(String password) {
-        //BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
-        this.password = password;//passwordEncoder.encode(password);
+        this.password = password;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setPremiumId(Long premiumId) {
-        this.premiumId = premiumId;
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+
+    public void setPremiumSubscription(PremiumSubscription premiumSubscription) {
+        this.premiumSubscription = premiumSubscription;
     }
 
     @Override
     public String toString() {
         return "Client{" +
-                "clientId=" + clientId +
+                "id=" + id +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", premiumId='" + premiumId + '\'' +
+                ", bankAccount='" + bankAccount + '\'' +
                 '}';
     }
 }
