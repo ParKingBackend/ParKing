@@ -1,6 +1,7 @@
 package com.example.parkingservice.model;
 
 import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -39,8 +40,7 @@ public class Parking {
         // Default constructor
     }
 
-    public Parking(String address, BigDecimal price, boolean isPremium, Long partnerId,
-                   int maxSpotsCount, int spotsTaken, LocalDateTime startTime, LocalDateTime endTime, boolean isDisabled) {
+    public Parking(String address, BigDecimal price, boolean isPremium, Long partnerId, int maxSpotsCount, int spotsTaken, LocalDateTime startTime, LocalDateTime endTime, boolean isDisabled) {
         this.address = address;
         this.price = price;
         this.isPremium = isPremium;
@@ -128,16 +128,6 @@ public class Parking {
 
     @Override
     public String toString() {
-        return "Parking{" +
-                "id=" + id +
-                ", address='" + address + '\'' +
-                ", price=" + price +
-                ", isPremium=" + isPremium +
-                ", partnerId=" + partnerId +
-                ", maxSpotsCount=" + maxSpotsCount +
-                ", spotsTaken=" + spotsTaken +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                '}';
+        return "Parking{" + "id=" + id + ", address='" + address + '\'' + ", price=" + price + ", isPremium=" + isPremium + ", partnerId=" + partnerId + ", maxSpotsCount=" + maxSpotsCount + ", spotsTaken=" + spotsTaken + ", startTime=" + startTime + ", endTime=" + endTime + '}';
     }
 }
