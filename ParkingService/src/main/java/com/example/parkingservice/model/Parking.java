@@ -1,18 +1,24 @@
 package com.example.parkingservice.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "parking")
+@Getter
+@Setter
 public class Parking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
+    private Long id;
     private String address;
+    @Getter
+    @Setter
     private BigDecimal price;
     private boolean isPremium;
 
@@ -33,13 +39,11 @@ public class Parking {
 
     @Column(name = "is_Disabled")
     private boolean isDisabled;
-
     // Constructors
 
     public Parking() {
         // Default constructor
     }
-
     public Parking(String address, BigDecimal price, boolean isPremium, Long partnerId, int maxSpotsCount, int spotsTaken, LocalDateTime startTime, LocalDateTime endTime, boolean isDisabled) {
         this.address = address;
         this.price = price;
@@ -54,76 +58,14 @@ public class Parking {
 
     // Getters and setters
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
 
     public boolean isPremium() {
         return isPremium;
     }
-
+    public void setDisabled(boolean isDisabled){this.isDisabled = isDisabled;}
     public void setPremium(boolean premium) {
         isPremium = premium;
-    }
-
-    public Long getPartnerId() {
-        return partnerId;
-    }
-
-    public void setPartnerId(Long partnerId) {
-        this.partnerId = partnerId;
-    }
-
-    public int getMaxSpotsCount() {
-        return maxSpotsCount;
-    }
-
-    public void setMaxSpotsCount(int maxSpotsCount) {
-        this.maxSpotsCount = maxSpotsCount;
-    }
-
-    public int getSpotsTaken() {
-        return spotsTaken;
-    }
-
-    public void setSpotsTaken(int spotsTaken) {
-        this.spotsTaken = spotsTaken;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
     }
 
     @Override
