@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonService {
@@ -26,14 +27,30 @@ public class PersonService {
     }
 
     public Person updatePerson(Long id, Person updatedPerson) {
-        if (personRepository.existsById(id)) {
-            updatedPerson.setId(id);
-            return personRepository.save(updatedPerson);
+        // Find the existing person by ID
+        Optional<Person> existingPerson = personRepository.findById(id);
+
+        if (existingPerson.isPresent()) {
+            // Update the fields of the existing person with the values from the updatedPerson
+            Person personToUpdate = existingPerson.get();
+            personToUpdate.setFirstName(updatedPerson.getFirstName());
+            personToUpdate.setSurname(updatedPerson.getSurname());
+
+            // Save the updated person
+            return personRepository.save(personToUpdate);
+        } else {
+            // Person with the specified ID not found, return null or throw an exception
+            return null; // You can also throw an exception if you prefer
         }
-        return null;
     }
 
-    public void deletePerson(Long id) {
-        personRepository.deleteById(id);
+    public boolean deletePerson(Long id) {
+        if (personRepository.existsById(id)) {
+            personRepository.deleteById(id);
+            return true; // Deletion was successful
+        } else {
+            return false; // Person with the specified ID not found
+        }
     }
+
 }

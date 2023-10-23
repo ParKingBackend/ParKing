@@ -45,4 +45,17 @@ public class ClientService {
     public boolean clientExists(Long clientId) {
         return clientRepository.existsById(clientId);
     }
+
+    public boolean deleteClient(Long id) {
+        if (clientRepository.existsById(id)) {
+            clientRepository.deleteById(id);
+            return true; // Deletion was successful
+        } else {
+            return false; // Client with the specified ID not found
+        }
+    }
+
+    public Iterable<Client> getAllClients() {
+        return clientRepository.findAll();
+    }
 }

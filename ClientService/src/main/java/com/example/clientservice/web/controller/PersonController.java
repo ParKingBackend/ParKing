@@ -9,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping("/persons")
@@ -21,6 +18,7 @@ public class PersonController {
     private final ClientService clientService;
 
     private final ClientService clientRepository;
+
     @Autowired
     public PersonController(PersonService personService, ClientService clientService, ClientService clientRepository) {
         this.personService = personService;
@@ -33,7 +31,7 @@ public class PersonController {
         return personService.getAllPersons();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public Person getPersonById(@PathVariable Long id) {
         return personService.getPersonById(id);
     }
@@ -52,17 +50,33 @@ public class PersonController {
             Map<String, String> response = new HashMap<>();
             response.put("error", "Client with ID " + clientId + " not found.");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-
         }
     }
 
-    @PutMapping("/edit/{id}")
-    public Person updatePerson(@PathVariable Long id, @RequestBody Person person) {
-        return personService.updatePerson(id, person);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Object> updatePerson(@PathVariable Long id, @RequestBody Person updatedPerson) {
+        Person updated = personService.updatePerson(id, updatedPerson);
+
+        if (updated != null) {
+            return ResponseEntity.ok(updated);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<Object> deletePerson(@PathVariable Long id) {
+        boolean deleted = personService.deletePerson(id);
+
+
+        Map<String, String> response = new HashMap<>();
+        if (deleted) {
+            response.put("message", "Person with ID " + id + " has been deleted.");
+            return ResponseEntity.ok(response);
+        } else {
+
+            response.put("error", "Person with ID " + id + " not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
     }
 
-    @DeleteMapping("delete/{id}")
-    public void deletePerson(@PathVariable Long id) {
-        personService.deletePerson(id);
-    }
 }

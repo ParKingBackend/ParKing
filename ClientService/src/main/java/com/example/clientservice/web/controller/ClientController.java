@@ -79,4 +79,29 @@ public class ClientController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteClient(@PathVariable Long id) {
+        try {
+            boolean deleted = clientService.deleteClient(id);
+
+            if (deleted) {
+                return ResponseEntity.ok("Client deleted successfully");
+            } else {
+                return ResponseEntity.badRequest().body("Client not found");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Client deletion failed");
+        }
+    }
+    @GetMapping("/get/all")
+    public ResponseEntity<Iterable<Client>> getAllClients() {
+        try {
+            Iterable<Client> clients = clientService.getAllClients();
+
+            return ResponseEntity.ok(clients);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
 }
