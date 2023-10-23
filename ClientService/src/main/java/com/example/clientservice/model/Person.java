@@ -14,7 +14,6 @@ public class Person {
     private Long id; // Primary key generated automatically
     private String firstName;
     private String surname;
-    private String userName;
 
     @OneToOne
     @JoinColumn(name = "client_id")
@@ -26,10 +25,10 @@ public class Person {
         // Default constructor
     }
 
-    public Person(String firstName, String surname, String userName, String email) {
+    public Person(String firstName, String surname, String email) {
         this.firstName = firstName;
         this.surname = surname;
-        this.userName = userName;
+
     }
 
     // Getters and setters for other attributes
@@ -44,7 +43,7 @@ public class Person {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", surname='" + surname + '\'' +
-                ", userName='" + userName + '\'' +
+                 '\'' +
                 '}';
     }
 }
