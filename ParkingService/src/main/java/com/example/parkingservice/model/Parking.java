@@ -2,48 +2,41 @@ package com.example.parkingservice.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "parking")
-@Getter
-@Setter
 public class Parking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
     private String address;
     @Getter
-    @Setter
     private BigDecimal price;
+    @Column(name = "is_Premium", columnDefinition = "TINYINT(1)") // Specify TINYINT(1)
+
     private boolean isPremium;
-
-    @Column(name = "partner_id")
+    @Getter
     private Long partnerId;
-
-    @Column(name = "max_spots_count")
+    @Getter
     private int maxSpotsCount;
-
-    @Column(name = "spots_taken")
+    @Getter
     private int spotsTaken;
-
-    @Column(name = "start_time")
+    @Getter
     private LocalDateTime startTime;
-
-    @Column(name = "end_time")
     private LocalDateTime endTime;
+    @Column(name = "is_Disabled", columnDefinition = "TINYINT(1)") // Specify TINYINT(1)
 
-    @Column(name = "is_Disabled")
     private boolean isDisabled;
-    // Constructors
 
+    // Constructors, getters, and setters
+
+    // Default constructor
     public Parking() {
-        // Default constructor
     }
+
     public Parking(String address, BigDecimal price, boolean isPremium, Long partnerId, int maxSpotsCount, int spotsTaken, LocalDateTime startTime, LocalDateTime endTime, boolean isDisabled) {
         this.address = address;
         this.price = price;
@@ -56,20 +49,55 @@ public class Parking {
         this.isDisabled = isDisabled;
     }
 
-    // Getters and setters
+    // Getters and setters for other attributes
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public void setIsPremium(boolean isPremium) {
+        this.isPremium = isPremium;
+    }
+
+    public void setPartnerId(Long partnerId) {
+        this.partnerId = partnerId;
+    }
+
+    public void setMaxSpotsCount(int maxSpotsCount) {
+        this.maxSpotsCount = maxSpotsCount;
+    }
+
+    public void setSpotsTaken(int spotsTaken) {
+        this.spotsTaken = spotsTaken;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    public void setIsDisabled(boolean isDisabled) {
+        this.isDisabled = isDisabled;
+    }
 
 
-
-    public boolean isPremium() {
+    public boolean getIsPremium() {
         return isPremium;
     }
-    public void setDisabled(boolean isDisabled){this.isDisabled = isDisabled;}
-    public void setPremium(boolean premium) {
-        isPremium = premium;
+
+
+    public CharSequence getAddress() {
+        return address;
     }
 
-    @Override
-    public String toString() {
-        return "Parking{" + "id=" + id + ", address='" + address + '\'' + ", price=" + price + ", isPremium=" + isPremium + ", partnerId=" + partnerId + ", maxSpotsCount=" + maxSpotsCount + ", spotsTaken=" + spotsTaken + ", startTime=" + startTime + ", endTime=" + endTime + '}';
+    public Object getEndTime() {
+        return endTime;
     }
 }
