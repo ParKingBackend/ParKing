@@ -25,7 +25,7 @@ public class Person {
         // Default constructor
     }
 
-    public Person(String firstName, String surname, String email) {
+    public Person(String firstName, String surname) {
         this.firstName = firstName;
         this.surname = surname;
 
