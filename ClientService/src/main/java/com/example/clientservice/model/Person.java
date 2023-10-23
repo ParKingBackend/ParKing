@@ -28,11 +28,9 @@ public class Person {
     public Person(String firstName, String surname) {
         this.firstName = firstName;
         this.surname = surname;
-
     }
 
     // Getters and setters for other attributes
-
     public void setClient(Client client) {
         this.client = client;
     }
