@@ -25,7 +25,6 @@ public class ClientController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-
     @PostMapping("/register")
     public ResponseEntity<String> registerClient(@RequestBody ClientRegistrationRequest registrationRequest) {
         try {

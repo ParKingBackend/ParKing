@@ -1,3 +1,5 @@
 ClientService/src/main/resources/application.properties
 ParkingService/src/main/resources/application.properties
 ```
+/ClientService/target/
+/ParkingService/target/
