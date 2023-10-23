@@ -43,7 +43,7 @@ public class Person {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", surname='" + surname + '\'' +
-                 '\'' +
+                '\'' +
                 '}';
     }
 }
