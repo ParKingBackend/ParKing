@@ -37,4 +37,12 @@ public class ClientService {
     public Client findById(Long clientId) {
         return clientRepository.findById(clientId).orElse(null);
     }
+
+    public Client getClientById(Long clientId) {
+        return clientRepository.findById(clientId).orElse(null);
+    }
+
+    public boolean clientExists(Long clientId) {
+        return clientRepository.existsById(clientId);
+    }
 }
