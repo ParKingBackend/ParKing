@@ -24,7 +24,7 @@ public class PersonController {
         return personService.getPersonById(id);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public Person createPerson(@RequestBody Person person) {
         return personService.createPerson(person);
     }
