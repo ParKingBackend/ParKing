@@ -14,7 +14,7 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
-    @GetMapping
+    @GetMapping("/get/all")
     public List<Person> getAllPersons() {
         return personService.getAllPersons();
     }
@@ -24,17 +24,17 @@ public class PersonController {
         return personService.getPersonById(id);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public Person createPerson(@RequestBody Person person) {
         return personService.createPerson(person);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public Person updatePerson(@PathVariable Long id, @RequestBody Person person) {
         return personService.updatePerson(id, person);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     public void deletePerson(@PathVariable Long id) {
         personService.deletePerson(id);
     }
