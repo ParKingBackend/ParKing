@@ -1,6 +1,8 @@
 package com.example.parkingservice.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -10,37 +12,32 @@ public class Parking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String address;
+    @Getter
     private BigDecimal price;
+    @Column(name = "is_Premium", columnDefinition = "TINYINT(1)") // Specify TINYINT(1)
+
     private boolean isPremium;
-
-    @Column(name = "partner_id")
+    @Getter
     private Long partnerId;
-
-    @Column(name = "max_spots_count")
+    @Getter
     private int maxSpotsCount;
-
-    @Column(name = "spots_taken")
+    @Getter
     private int spotsTaken;
-
-    @Column(name = "start_time")
+    @Getter
     private LocalDateTime startTime;
-
-    @Column(name = "end_time")
     private LocalDateTime endTime;
+    @Column(name = "is_Disabled", columnDefinition = "TINYINT(1)") // Specify TINYINT(1)
 
-    @Column(name = "is_Disabled")
     private boolean isDisabled;
 
-    // Constructors
+    // Constructors, getters, and setters
 
+    // Default constructor
     public Parking() {
-        // Default constructor
     }
 
-    public Parking(String address, BigDecimal price, boolean isPremium, Long partnerId,
-                   int maxSpotsCount, int spotsTaken, LocalDateTime startTime, LocalDateTime endTime, boolean isDisabled) {
+    public Parking(String address, BigDecimal price, boolean isPremium, Long partnerId, int maxSpotsCount, int spotsTaken, LocalDateTime startTime, LocalDateTime endTime, boolean isDisabled) {
         this.address = address;
         this.price = price;
         this.isPremium = isPremium;
@@ -52,92 +49,55 @@ public class Parking {
         this.isDisabled = isDisabled;
     }
 
-    // Getters and setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getAddress() {
-        return address;
-    }
+    // Getters and setters for other attributes
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
     }
 
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public boolean isPremium() {
-        return isPremium;
-    }
-
-    public void setPremium(boolean premium) {
-        isPremium = premium;
-    }
-
-    public Long getPartnerId() {
-        return partnerId;
+    public void setIsPremium(boolean isPremium) {
+        this.isPremium = isPremium;
     }
 
     public void setPartnerId(Long partnerId) {
         this.partnerId = partnerId;
     }
 
-    public int getMaxSpotsCount() {
-        return maxSpotsCount;
-    }
-
     public void setMaxSpotsCount(int maxSpotsCount) {
         this.maxSpotsCount = maxSpotsCount;
-    }
-
-    public int getSpotsTaken() {
-        return spotsTaken;
     }
 
     public void setSpotsTaken(int spotsTaken) {
         this.spotsTaken = spotsTaken;
     }
 
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
     }
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
-    @Override
-    public String toString() {
-        return "Parking{" +
-                "id=" + id +
-                ", address='" + address + '\'' +
-                ", price=" + price +
-                ", isPremium=" + isPremium +
-                ", partnerId=" + partnerId +
-                ", maxSpotsCount=" + maxSpotsCount +
-                ", spotsTaken=" + spotsTaken +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                '}';
+    public void setIsDisabled(boolean isDisabled) {
+        this.isDisabled = isDisabled;
+    }
+
+
+    public boolean getIsPremium() {
+        return isPremium;
+    }
+
+
+    public CharSequence getAddress() {
+        return address;
+    }
+
+    public Object getEndTime() {
+        return endTime;
     }
 }
