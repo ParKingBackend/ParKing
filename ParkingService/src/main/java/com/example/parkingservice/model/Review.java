@@ -28,7 +28,6 @@ public class Review {
     public Review() {
         // Default constructor
     }
-
     public Review(String title, String description, double rating, Long clientId, Parking parking) {
         this.title = title;
         this.description = description;
