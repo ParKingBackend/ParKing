@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/client")
 public class ClientController {
@@ -44,6 +46,7 @@ public class ClientController {
             return ResponseEntity.badRequest().body("Client registration failed");
         }
     }
+
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
         try {
@@ -94,14 +97,10 @@ public class ClientController {
             return ResponseEntity.badRequest().body("Client deletion failed");
         }
     }
-    @GetMapping("/get/all")
-    public ResponseEntity<Iterable<Client>> getAllClients() {
-        try {
-            Iterable<Client> clients = clientService.getAllClients();
 
-            return ResponseEntity.ok(clients);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(null);
-        }
+    @GetMapping("/get/all")
+    public List<Client> getAllClients() {
+        return clientService.getAllClients();
     }
+
 }

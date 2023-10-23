@@ -31,9 +31,6 @@ public class Parking {
 
     private boolean isDisabled;
 
-    // Constructors, getters, and setters
-
-    // Default constructor
     public Parking() {
     }
 
@@ -49,40 +46,6 @@ public class Parking {
         this.isDisabled = isDisabled;
     }
 
-    // Getters and setters for other attributes
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public void setIsPremium(boolean isPremium) {
-        this.isPremium = isPremium;
-    }
-
-    public void setPartnerId(Long partnerId) {
-        this.partnerId = partnerId;
-    }
-
-    public void setMaxSpotsCount(int maxSpotsCount) {
-        this.maxSpotsCount = maxSpotsCount;
-    }
-
-    public void setSpotsTaken(int spotsTaken) {
-        this.spotsTaken = spotsTaken;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
     public void setIsDisabled(boolean isDisabled) {
         this.isDisabled = isDisabled;
     }
@@ -92,12 +55,4 @@ public class Parking {
         return isPremium;
     }
 
-
-    public CharSequence getAddress() {
-        return address;
-    }
-
-    public Object getEndTime() {
-        return endTime;
-    }
 }

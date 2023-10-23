@@ -30,7 +30,6 @@ public class Person {
         this.surname = surname;
     }
 
-    // Getters and setters for other attributes
     public void setClient(Client client) {
         this.client = client;
     }
