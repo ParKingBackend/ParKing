@@ -23,7 +23,6 @@ public class CompanyService {
     }
 
     public Company createCompany(Company company) {
-        // Add validation or business logic here if needed
         return companyRepository.save(company);
     }
 
