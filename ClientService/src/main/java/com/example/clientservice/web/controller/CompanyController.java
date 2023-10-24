@@ -32,7 +32,7 @@ public class CompanyController {
         this.clientRepository = clientRepository;
     }
 
-    @GetMapping
+    @GetMapping("/get/all")
     public List<Company> getAllCompanies() {
         return companyService.getAllCompanies();
     }
@@ -59,13 +59,15 @@ public class CompanyController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit/{id}")
     public Optional<Company> updateCompany(@PathVariable Long id, @RequestBody Company company) {
         return companyService.updateCompany(id, company);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteCompany(@PathVariable Long id) {
         companyService.deleteCompany(id);
     }
+
+
 }

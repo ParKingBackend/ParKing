@@ -13,13 +13,20 @@ public class PremiumSubscriptionService {
 
     private final PremiumSubscriptionRepository premiumSubscriptionRepository;
 
+
     @Autowired
     public PremiumSubscriptionService(PremiumSubscriptionRepository premiumSubscriptionRepository) {
         this.premiumSubscriptionRepository = premiumSubscriptionRepository;
+
     }
 
+    public List<PremiumSubscription> getAllSubscriptions() {
+        return premiumSubscriptionRepository.findAll();
+    }
 
     public void saveSubscription(PremiumSubscription subscription) {
         premiumSubscriptionRepository.save(subscription);
     }
+
+
 }

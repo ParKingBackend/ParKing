@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/subscription")
 public class PremiumSubscriptionController {
@@ -19,24 +21,25 @@ public class PremiumSubscriptionController {
     private ClientService clientService;
 
     @PostMapping("/create/{clientId}")
-    public ResponseEntity<String> createSubscription(@PathVariable Long clientId, @RequestBody PremiumSubscription subscription) {
-        try {
-            // Fetch the client from the database based on the clientId
-            Client client = clientService.findById(clientId);
+    public ResponseEntity<String> createPremiumSubscription(@PathVariable Long clientId, @RequestBody PremiumSubscription subscription) {
+        Client client = clientService.findById(clientId);
 
-            if (client == null) {
-                return ResponseEntity.badRequest().body("Client not found");
-            }
-
-            // Set the client for the subscription
-            subscription.setClient(client);
-
-            // Save the premium subscription to the database
-            premiumSubscriptionService.saveSubscription(subscription);
-
-            return ResponseEntity.ok("Premium subscription created successfully");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Failed to create premium subscription");
+        if (client == null) {
+            return ResponseEntity.badRequest().body("Client not found");
         }
+
+        subscription.setClient(client);
+
+        premiumSubscriptionService.saveSubscription(subscription);
+
+        return ResponseEntity.ok("Premium subscription created successfully");
     }
+
+    @GetMapping("/get/all")
+    public List<PremiumSubscription> getAllPremiumSubscriptions() {
+        return premiumSubscriptionService.getAllSubscriptions();
+    }
+
+
+
 }
