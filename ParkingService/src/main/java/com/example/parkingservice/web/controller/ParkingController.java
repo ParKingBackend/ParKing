@@ -25,5 +25,19 @@ public class ParkingController {
         return parkingService.createParking(parking);
     }
 
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Parking> getParkingById(@PathVariable Long id) {
+        try {
+            Parking parking = parkingService.findById(id);
+
+            if (parking == null) {
+                return ResponseEntity.badRequest().body(null);
+            }
+
+            return ResponseEntity.ok(parking);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
 
 }

@@ -17,13 +17,12 @@ public class PersonController {
     private final PersonService personService;
     private final ClientService clientService;
 
-    private final ClientService clientRepository;
 
     @Autowired
-    public PersonController(PersonService personService, ClientService clientService, ClientService clientRepository) {
+    public PersonController(PersonService personService, ClientService clientService) {
         this.personService = personService;
         this.clientService = clientService;
-        this.clientRepository = clientRepository;
+
     }
 
     @GetMapping("/get/all")
@@ -38,7 +37,7 @@ public class PersonController {
 
     @PostMapping("/create/{clientId}")
     public ResponseEntity<Object> createPerson(@PathVariable Long clientId, @RequestBody Person person) {
-        Optional<Client> optionalClient = Optional.ofNullable(clientRepository.findById(clientId));
+        Optional<Client> optionalClient = Optional.ofNullable(clientService.findById(clientId));
         if (optionalClient.isPresent()) {
             Client client = optionalClient.get();
             person.setClient(client);
