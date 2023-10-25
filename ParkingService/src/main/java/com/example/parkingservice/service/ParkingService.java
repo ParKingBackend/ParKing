@@ -25,7 +25,7 @@ public class ParkingService {
         }
         return parkingRepository.save(parking);
     }
-    public Parking findById(Long clientId) {
-        return parkingRepository.findById(clientId).orElse(null);
+    public Parking findById(Long parkingId) {
+        return parkingRepository.findById(parkingId).orElse(null);
     }
 }
