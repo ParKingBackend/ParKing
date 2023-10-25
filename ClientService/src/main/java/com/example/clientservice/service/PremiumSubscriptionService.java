@@ -24,9 +24,25 @@ public class PremiumSubscriptionService {
         return premiumSubscriptionRepository.findAll();
     }
 
-    public void saveSubscription(PremiumSubscription subscription) {
-        premiumSubscriptionRepository.save(subscription);
+
+    public PremiumSubscription createPremiumSubscription(PremiumSubscription premiumSubscription) {
+        return premiumSubscriptionRepository.save(premiumSubscription);
     }
 
+    public PremiumSubscription updatePremiumSubscription(Long id, PremiumSubscription updatedPremiumSubscription) {
+        // Find the existing person by ID
+        PremiumSubscription existingPremiumSubscription = premiumSubscriptionRepository.findById(id).orElse(null);
 
+        if (existingPremiumSubscription != null) {
+            // Update the fields of the existing person with the values from the updatedPerson
+            existingPremiumSubscription.setEndDate(updatedPremiumSubscription.getEndDate());
+            existingPremiumSubscription.setDiscountAmount(updatedPremiumSubscription.getDiscountAmount());
+
+            // Save the updated person
+            return premiumSubscriptionRepository.save(existingPremiumSubscription);
+        } else {
+            // Person with the specified ID not found, return null or throw an exception
+            return null; // You can also throw an exception if you prefer
+        }
+    }
 }

@@ -17,6 +17,9 @@ public class Client {
     private String username;
     private String password;
     private String email;
+    private String image; // Add the 'image' field to match the SQL table
+    private int xp;
+    private int level;
     @Column(name = "bank_account")
     private String bankAccount; // Nullable attribute
     @Getter
