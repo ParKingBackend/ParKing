@@ -14,11 +14,16 @@ import java.util.List;
 public class ClientService {
     private static final Logger log = LoggerFactory.getLogger(ClientService.class);
 
-    @Autowired
-    private ClientRepository clientRepository;
+
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    private final ClientRepository clientRepository;
+
+    @Autowired
+    public ClientService(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
 
     public void registerClient(String username, String password, String email) {
         // Hash the password using BCrypt
@@ -60,5 +65,13 @@ public class ClientService {
 
     public List<Client> getAllClients() {
         return clientRepository.findAll();
+    }
+
+    public void addBankAccount(Long clientId, String bankAccount) {
+        clientRepository.addBankAccount(clientId, bankAccount);
+    }
+
+    public void addImage(Long clientId, String image) {
+        clientRepository.addImage(clientId, image);
     }
 }

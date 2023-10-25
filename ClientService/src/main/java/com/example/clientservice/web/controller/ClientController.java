@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/client")
@@ -102,5 +103,24 @@ public class ClientController {
     public List<Client> getAllClients() {
         return clientService.getAllClients();
     }
+
+    @PostMapping("/{clientId}/add-bank-account")
+    public ResponseEntity<String> addBankAccountToClient(
+            @PathVariable Long clientId,
+            @RequestBody Map<String, String> requestBody) {
+        String bankAccount = requestBody.get("bankAccount");
+        clientService.addBankAccount(clientId, bankAccount);
+        return ResponseEntity.ok("Bank account added successfully.");
+    }
+
+    @PostMapping("/{clientId}/add-image")
+    public ResponseEntity<String> addImageToClient(
+            @PathVariable Long clientId,
+            @RequestBody Map<String, String> requestBody) {
+        String image = requestBody.get("image");
+        clientService.addImage(clientId, image);
+        return ResponseEntity.ok("Image added successfully.");
+    }
+
 
 }
